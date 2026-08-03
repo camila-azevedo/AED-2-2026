@@ -22,6 +22,7 @@ public class BuscaBinaria {
 			parametroPesquisa = leitor.nextInt();
 			inicio = 0;
 			fim = (vetor.length - 1);
+			contador = 0;
 			
 			while (inicio <= fim) {
 				meio = ((inicio + fim)/2);
