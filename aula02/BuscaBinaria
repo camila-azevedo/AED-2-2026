@@ -35,7 +35,7 @@ public class BuscaBinaria {
 				} else {
 					inicio = (meio + 1);
 				}
-				meio = ((inicio + fim) / 2);
+				
 			}
 		} while (parametroPesquisa != -1);
 		leitor.close();
