@@ -1,0 +1,53 @@
+package aula03;
+
+public class Lista {
+	// propriedades da classe
+	private No cabeca = null;
+	
+	// métodos da classe
+	public void inserir (int numero) {
+		// caso fácil: lista vazia
+		if (cabeca ==  null) {
+			cabeca = new No(numero, null);
+			return;
+		}
+		// caso dificil: lista nao vazia
+		No ultimo = cabeca;
+		while (ultimo.getProximo() != null) { // aki q aponto o ponteiro ate chegar no ultimo
+			ultimo = ultimo.getProximo();
+		}
+		ultimo.setProximo(new No(numero, null));
+	}
+	
+	public void excluir(int numero) {
+		// caso mt facil: lista vazia
+		if (cabeca == null) {
+			return;
+		}
+		// caso facil: excluir o primeiro no da lista
+		if (cabeca.getNumero() == numero) {
+			cabeca = cabeca.getProximo();
+			return;
+		}
+		// caso dificil: excluir algum nó do meio/ final da lista
+		No anterior = cabeca;
+		while ((anterior.getProximo() != null) &&
+			   (anterior.getProximo().getNumero() != numero)) {
+			anterior = anterior.getProximo();
+		}
+		if (anterior.getProximo() == null) {
+			// caso em que foi tentada a exclusao de um numero q n existe
+			return;
+		}
+		// caso da esxclusao propriamente dita no meio/fim
+		anterior.setProximo(anterior.getProximo().getProximo());
+	}
+	
+	public void imprimir() {
+		No ponteiro = cabeca;
+		while (ponteiro != null) {
+			System.out.println(ponteiro.getNumero());
+			ponteiro = ponteiro.getProximo();
+		}
+	}
+}
