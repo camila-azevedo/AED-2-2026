@@ -20,7 +20,9 @@ public class Lista {
 			 // caso fácil: exclui o primeiro nó da lista
 			if (cabeca.getNumero() == numero) {
 				cabeca = cabeca.getProximo();
-				cabeca.setAnterior(null);
+				if (cabeca != null) {
+					cabeca.setAnterior(null);
+					}
 				return;
 				}
 			
