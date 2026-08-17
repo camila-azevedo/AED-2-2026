@@ -37,7 +37,9 @@ public class Lista {
 			
 			// caso MUITO dificil: numero encontrado
 			ponteiro.getAnterior().setProximo(ponteiro.getProximo());
-			ponteiro.getProximo().setAnterior(ponteiro.getAnterior());
+			if (ponteiro.getProximo() != null) {
+				ponteiro.getProximo().setAnterior(ponteiro.getAnterior());
+			}
 		}
 		public void imprimir() {
 			No ponteiro = cabeca;
