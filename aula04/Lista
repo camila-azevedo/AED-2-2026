@@ -8,6 +8,9 @@ public class Lista {
 	public void inserir(int numero) {
 			cabeca = new No(numero, null, cabeca); // referencia depois (direita) do igual é velha
 			//cabeca (esquerda) é a nova cabeca
+			if (cabeca.getProximo() != null) {
+				cabeca.getProximo().setAnterior(cabeca);
+			}
 		}
 		public void excluir(int numero) {
 			// caso mt fácil: lista vazia
