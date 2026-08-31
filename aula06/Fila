@@ -1,0 +1,34 @@
+package aula06;
+
+public class Fila {
+	// propriedades
+	private No cabeca = null;
+	
+	// métodos da classe
+	public void entrar(int numero){
+		cabeca = new No(numero, cabeca);
+	}
+	
+	public void sair(int numero) {
+		// caso fácil: fila vazia
+		if (cabeca == null) {
+			System.out.println("lista vaziaaaaa");
+			return;
+		}
+		// caso médio: fila so tem um unico nó
+		if (cabeca.getProximo() == null) {
+			System.out.println(cabeca.getNumero());
+			cabeca = null;
+			return;
+		}
+		
+		// caso difícil: fila tem mais de um nó
+		No ponteiro = cabeca;
+		while (ponteiro.getProximo().getProximo() != null) { // para buscar o repróximo, parando no penúltimo
+			ponteiro = ponteiro.getProximo();
+		}
+		System.out.println(ponteiro.getProximo().getNumero());
+		ponteiro.setProximo(null);
+		
+	}
+}
