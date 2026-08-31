@@ -9,7 +9,7 @@ public class Fila {
 		cabeca = new No(numero, cabeca);
 	}
 	
-	public void sair(int numero) {
+	public void sair() {
 		// caso fácil: fila vazia
 		if (cabeca == null) {
 			System.out.println("lista vaziaaaaa");
