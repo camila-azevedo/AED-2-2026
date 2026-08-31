@@ -1,0 +1,21 @@
+package aula06;
+
+public class Pilha {
+	// propriedades
+	private No cabeca = null;
+	
+	// metodos da classe
+	public void push(int numero) { // entrar
+		cabeca = new No(numero, cabeca);
+	}
+	public void pop() { // sair
+		// caso muito facil: pilha vazia
+		if (cabeca == null) {
+			return;
+		}
+		// caso fácil: pilha nao vazia
+		System.out.println(cabeca.getNumero());
+		cabeca = cabeca.getProximo();
+		
+	}
+}
