@@ -1,19 +1,35 @@
 package aula07;
 
 public class Principal {
+	
+	/*public static void main (String [] args) {
+	Deque objDeque = new Deque();
+	
+	for (int i = 0 ; i < 5; i++) {
+		objDeque.entrarPelaEsquerda(i);
+	}
+	for (int i = 1000 ; i < 1005; i++) { // pilha da direita
+		objDeque.entrarPelaDireita(i);
+	}
+	objDeque.imprimir();
+	for (int i = 0 ; i < 10 ; i++) { // fila da direita
+		objDeque.sairPelaDireita();
+	}
+} */
+
 	public static void main (String [] args) {
-		Deque objDeque = new Deque();
+		DequeBancario objDeque = new DequeBancario();
 		
-		for (int i = 0 ; i < 5; i++) {
-			objDeque.entrarPelaEsquerda(i);
+		objDeque.atender();
+		for (int i = 0 ; i < 10 ; i++) {
+			objDeque.entrar(true, i);
 		}
-		for (int i = 1000 ; i < 1005; i++) { // pilha da direita
-			objDeque.entrarPelaDireita(i);
+		for (int i = 1000 ; i < 1010 ; i++) {
+			objDeque.entrar(false, i);
 		}
-		objDeque.imprimir();
-		for (int i = 0 ; i < 10 ; i++) { // fila da direita
-			objDeque.sairPelaDireita();
+		for (int i = 0 ; i < 20 ; i++) {
+			objDeque.atender();
 		}
 	}
-}
 
+}
