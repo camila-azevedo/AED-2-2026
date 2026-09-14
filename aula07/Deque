@@ -1,0 +1,58 @@
+package aula07;
+
+public class Deque {
+	// propriedades da classe
+	private No cabeca = null;
+	
+	// métodos da classe
+	public void entrarPelaEsquerda(int numero) {
+		cabeca = new No(numero, cabeca);
+	}
+	
+	public void entrarPelaDireita(int numero) {
+		// cenário fácil: deque vazio - muito rapido
+		if (cabeca == null) {
+			cabeca = new No(numero, cabeca);
+			return;
+		}
+		
+		// cenário dificil: deque nao vazio - varrer até a ultima posicao - muito lento
+		No ultimo = cabeca;
+		while (ultimo.getProximo() != null) { // procurando o último, o que aponta pro nulo
+			ultimo = ultimo.getProximo();
+		}
+		ultimo.setProximo(new No(numero, null));
+	}
+	
+	public void sairPelaEsquerda() {
+		// cenario mt fácil: deque vazio
+		if (cabeca == null) {
+			return;
+		}
+		
+		// cenário fácil: deque NÃO vazio
+		System.out.println(cabeca.getNumero());
+		cabeca = cabeca.getProximo();
+	}
+	
+	public void sairPelaDireita() {
+		// cenario mt fácil: deque vazio
+		if (cabeca == null) {
+			return;
+		}
+		 // cenario fácil: deque com apenas 1 unico nó
+		if (cabeca.getProximo() == null) {
+			System.out.println(cabeca.getNumero());
+			cabeca = null;
+			return;
+		}
+		
+		// Cenário Difícil: deque tem mais de um nó
+		No penultimo = cabeca;
+		while (penultimo.getProximo().getProximo() != null) { // procurando o penultimo: cujo proximo aponta para o nulo
+			penultimo = penultimo.getProximo(); 
+		}
+		System.out.println(penultimo.getProximo().getNumero()); // imprimir o ultimo (proximo do penultimo)
+		penultimo.setProximo(null); // penultimo vira ultimo (vira nulo), já que o último saiu da fila
+	}
+}
