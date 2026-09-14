@@ -55,4 +55,13 @@ public class Deque {
 		System.out.println(penultimo.getProximo().getNumero()); // imprimir o ultimo (proximo do penultimo)
 		penultimo.setProximo(null); // penultimo vira ultimo (vira nulo), já que o último saiu da fila
 	}
+	
+	public void imprimir() {
+		No ponteiro = cabeca;
+		
+		while (ponteiro != null) {
+			System.out.println(ponteiro.getNumero());
+			ponteiro = ponteiro.getProximo();
+		}
+	}
 }
