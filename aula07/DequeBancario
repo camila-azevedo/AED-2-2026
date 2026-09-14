@@ -1,0 +1,66 @@
+package aula07;
+
+public class DequeBancario { // entrada pelo meio e saida pelos cantos - aqui é so fila
+	// propriedades da classe
+	private No filaNormal = null;
+	private No filaPreferencial = null;
+	
+	// métodos da classe
+	public void entrar(boolean normal, int numero) {
+		if (normal) {
+			filaNormal = new No(numero, filaNormal);
+		} else {
+			filaPreferencial = new No(numero, filaPreferencial);
+		}
+	}
+	private No sair(No fila) {
+		// caso mt facil: fila vazia
+		if (fila == null) {
+			return null;
+		}
+		
+		// cenario facil: ila so tem 1 nó
+		if (fila.getProximo() == null) {
+			System.out.println(fila.getNumero());
+			return null;
+		}
+		// Cenário dificil: fila tem mais de 1 nó
+		No penultimo = fila;
+		while (penultimo.getProximo().getProximo() != null) {
+			penultimo = penultimo.getProximo();
+		}
+		System.out.println(penultimo.getProximo().getNumero());
+		penultimo.setProximo(null);
+		return fila;
+	}
+	
+	private int contador = 0;
+	public void atender() {
+		// cenário muito facil: ambas filas vazias
+		if ((filaNormal == null) && (filaPreferencial == null)) {
+			contador = 0;
+			return;
+		}
+		// cenário fácil: so tem gente na normal
+		if (filaPreferencial == null) {
+			filaNormal = sair(filaNormal);
+			contador = 0;
+			return;
+		}
+		
+		// cenário fácil: so tem gente na fila preferencial
+		if (filaNormal == null) {
+			filaPreferencial = sair(filaPreferencial);
+			contador = 0;
+			return;
+		}
+		// cenario dificil
+		if (contador < 3){
+			filaPreferencial = sair(filaPreferencial);
+			contador++;
+		} else {
+			filaNormal = sair(filaNormal);
+			contador = 0;
+		}
+	}
+}
