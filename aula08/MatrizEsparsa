@@ -1,0 +1,80 @@
+package aula08;
+
+public class MatrizEsparsa {
+	// propriedades
+	private Diretor cabeca = null;
+	private int modulo = 0;
+	
+	// método construtor cheio da classe
+	public MatrizEsparsa(int modulo) {
+		this.modulo = modulo;
+	}
+	
+	// métodos da classe
+	private Diretor procurarDiretor(int numero) {
+		int resto = (numero % modulo);
+		
+		Diretor ponteiro = cabeca;
+		while ((ponteiro != null) && (ponteiro.getResto() != resto)) { // apontei ponteiro para cabeca, enquanto o ponteiro for diferente de nulo, to procurando até o vazio
+			ponteiro = ponteiro.getProximoDiretor();
+		}
+		
+		// cenario de resto encontrado
+		if (ponteiro != null) {
+			return ponteiro;
+		}
+		
+		// cenário de resto nao encontrado
+		cabeca = new Diretor(resto, null, cabeca); 
+		return cabeca;
+	}
+	
+	public void inserir(int numero) {
+		Diretor ponteiroDiretor = procurarDiretor(numero); // se nao tiver ponteiro, ele cria um novo
+		
+		ponteiroDiretor.setProximoNo(new No(numero, ponteiroDiretor.getProximoNo())); // inserção pela cabeca (politica de pilha)
+	}
+	
+	public void excluir(int numero) {
+		Diretor ponteiroDiretor = procurarDiretor(numero);
+		// cenario mt fácil: lista vazia
+		if (ponteiroDiretor.getProximoNo() == null) {
+			return;
+		}
+		
+		// caso fácil: excluir o primeiro e o único
+		if (ponteiroDiretor.getProximoNo().getNumero() == numero) {
+			ponteiroDiretor.setProximoNo(ponteiroDiretor.getProximoNo().getProximo()); // get proximo.getproximo é igual a reproximo
+			return;
+		}
+		
+		// procura do numero a ser excluido
+		No anterior = ponteiroDiretor.getProximoNo();
+		while((anterior.getProximo() != null) && (anterior.getProximo().getNumero() != numero)) { // 2 condicoes: ou a lista acaba e eu nao achei ou eu vou parar antes do q to procurando
+			anterior = anterior.getProximo();
+		}
+		
+		// cenario dificil: o numero NÃO foi encontrado
+		if (anterior.getProximo() == null) {
+			return;
+		}
+		
+		// cenario dificil: o numero foi encontrado
+		anterior.setProximo(anterior.getProximo().getProximo()); // pega o repróximo
+	}
+	
+	public void imprimir() {
+		System.out.println("Resto \t Números");
+		Diretor ponteiroDiretor = cabeca;
+		while (ponteiroDiretor != null) {
+			System.out.print(ponteiroDiretor.getResto() + "\t");
+			No ponteiroNo = ponteiroDiretor.getProximoNo();
+			while (ponteiroNo != null) {
+				System.out.print(ponteiroNo.getNumero() + ", ");
+				ponteiroNo = ponteiroNo.getProximo();
+			}
+			System.out.println();
+			ponteiroDiretor = ponteiroDiretor.getProximoDiretor();
+		}
+	}
+}
