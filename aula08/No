@@ -1,6 +1,6 @@
 package aula08;
 
-public class No {
+public class No { // representa colunas da matriz
 	// propriedades da classe
 	private int numero = 0;
 	private No proximo = null;
